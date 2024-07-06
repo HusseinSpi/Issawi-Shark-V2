@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsersData } from "../../redux/thunk/userThunks";
 import { getAllProjects, deleteProject } from "../../redux/thunk/projectThunks";
@@ -58,6 +58,8 @@ const AdminPage = () => {
       .catch((error) => {});
   };
 
+  console.log("Recent Activities:", recentActivities.data.data);
+
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <h1 className="text-3xl font-bold text-center mb-8">Admin Page</h1>
@@ -90,8 +92,9 @@ const AdminPage = () => {
           <p>{recentActivities.error}</p>
         )}
         <ul>
-          {Array.isArray(recentActivities.data) &&
-            recentActivities.data.map((activity) => (
+          {Array.isArray(recentActivities.data.data) &&
+          recentActivities.data.data.length > 0 ? (
+            recentActivities.data.data.map((activity) => (
               <li key={activity._id} className="mb-2">
                 <p
                   className={`text-gray-600 ${
@@ -101,7 +104,10 @@ const AdminPage = () => {
                   {activity.description}
                 </p>
               </li>
-            ))}
+            ))
+          ) : (
+            <p>No recent activities available.</p>
+          )}
         </ul>
       </div>
 
