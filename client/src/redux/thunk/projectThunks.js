@@ -80,6 +80,19 @@ export const updateProject = createAsyncThunk(
   }
 );
 
+export const updateRating = createAsyncThunk(
+  "project/updateRating",
+  async (projectId, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(`projects/${projectId}/rating`);
+      return response.data.data;
+    } catch (err) {
+      console.error("Error updating rating:", err);
+      return rejectWithValue(err.response?.data);
+    }
+  }
+);
+
 export const deleteProject = createAsyncThunk(
   "project/deleteProject",
   async (projectId, { dispatch, rejectWithValue }) => {

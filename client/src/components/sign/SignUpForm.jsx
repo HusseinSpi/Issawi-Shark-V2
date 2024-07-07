@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../../redux/thunk/userThunks";
 import { toast } from "react-toastify";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     userName: "",
     firstName: "",
@@ -38,6 +40,7 @@ const SignUpForm = () => {
       .unwrap()
       .then((response) => {
         toast.success("Signup successful!");
+        navigate("/general");
       })
       .catch((error) => {
         toast.error("Failed to sign up");

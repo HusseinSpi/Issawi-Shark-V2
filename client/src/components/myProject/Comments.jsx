@@ -6,7 +6,7 @@ import {
   likeComment,
 } from "../../redux/thunk/commentThunks";
 import { useNavigate } from "react-router-dom";
-import { updateProject } from "../../redux/thunk/projectThunks";
+import { updateRating } from "../../redux/thunk/projectThunks";
 import { useEffect, useState } from "react";
 import { CiStar, CiPen } from "react-icons/ci";
 import { AiFillLike } from "react-icons/ai";
@@ -66,7 +66,7 @@ const Comments = ({ projectId }) => {
           })
         );
       }
-      await dispatch(updateProject(projectId));
+      await dispatch(updateRating(projectId));
       setCommentContent("");
       setRating(0);
       setPushComment(true);

@@ -4,6 +4,7 @@ import {
   createProject,
   getProject,
   updateProject,
+  updateRating,
   deleteProject,
 } from "../thunk/projectThunks";
 
@@ -72,6 +73,22 @@ const projectSlice = createSlice({
         }
       })
       .addCase(updateProject.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload || "Unknown error";
+      })
+      .addCase(updateRating.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateRating.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const index = state.data.findIndex(
+          (project) => project.id === action.meta.arg.id
+        );
+        if (index !== -1) {
+          state.data[index].rating = action.payload;
+        }
+      })
+      .addCase(updateRating.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || "Unknown error";
       })

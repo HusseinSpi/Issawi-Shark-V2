@@ -18,6 +18,7 @@ const SignInForm = () => {
       .unwrap()
       .then((response) => {
         toast.success("Login successful!");
+        window.location.reload();
       })
       .catch((error) => {
         toast.error("Failed to login");
