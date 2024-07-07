@@ -14,16 +14,16 @@ const signToken = (id) => {
 
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
-  const cookieOptions = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: false,
-    sameSite: "none",
-  };
-  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+  // const cookieOptions = {
+  //   expires: new Date(
+  //     Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+  //   ),
+  //   httpOnly: false,
+  //   sameSite: "none",
+  // };
+  // if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
 
-  res.cookie("jwt", token, cookieOptions);
+  // res.cookie("jwt", token, cookieOptions);
 
   res.status(statusCode).json({
     status: "success",
@@ -52,7 +52,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     instagram: req.body.instagram || "",
   });
 
-  createSendToken(newUser, 201, res);
+  // createSendToken(newUser, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -68,7 +68,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError("Incorrect email or password", 401));
   }
 
-  createSendToken(user, 200, res);
+  // createSendToken(user, 200, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -191,7 +191,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   await user.save();
 
-  createSendToken(user, 200, res);
+  // createSendToken(user, 200, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -209,5 +209,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
   await user.save();
 
-  createSendToken(user, 200, res);
+  // createSendToken(user, 200, res);
 });
