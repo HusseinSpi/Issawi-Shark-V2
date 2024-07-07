@@ -8,7 +8,6 @@ import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
