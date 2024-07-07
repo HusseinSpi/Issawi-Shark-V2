@@ -16,16 +16,16 @@ const recentActivityRoutes = require("./routes/recentActivityRoutes");
 
 const app = express();
 
-const corsOptions = {
-  origin: [
-    "http://localhost:5173",
-    "https://main--issawi-shark.netlify.app/",
-    "https://issawi-shark-v2.onrender.com",
-  ],
-  credentials: true,
-};
+// const corsOptions = {
+//   origin: [
+//     "http://localhost:5173",
+//     "https://main--issawi-shark.netlify.app/",
+//     "https://issawi-shark-v2.onrender.com",
+//   ],
+//   credentials: true,
+// };
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(helmet());
 app.use(cookieParser());
 
