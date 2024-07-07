@@ -25,8 +25,15 @@ import SignInPage from "./pages/SignIn/SignInPage";
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  // useEffect(() => {
+  //   const userToken = Cookies.get("jwt");
+  //   if (userToken) {
+  //     setIsAuthenticated(true);
+  //   }
+  // }, []);
+
   useEffect(() => {
-    const userToken = Cookies.get("jwt");
+    const userToken = localStorage.getItem("token");
     if (userToken) {
       setIsAuthenticated(true);
     }

@@ -30,6 +30,7 @@ const MyAccountForm = ({
 
   const handleLogOut = () => {
     Cookies.remove("jwt");
+    localStorage.removeItem("token");
     window.location.reload();
   };
 

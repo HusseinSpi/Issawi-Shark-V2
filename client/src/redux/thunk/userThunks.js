@@ -23,6 +23,7 @@ export const getCurrentUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get("users/me");
+      console.log(response.data);
       return response.data;
     } catch (error) {
       toast.error("Failed to get current user");
@@ -120,6 +121,7 @@ export const loginUser = createAsyncThunk(
           description: `User logged in: ${email}`,
         })
       );
+      localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (error) {
       toast.error("Login failed");
