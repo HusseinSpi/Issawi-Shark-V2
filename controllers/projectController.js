@@ -95,9 +95,9 @@ exports.updateProjectRating = catchAsync(async (req, res, next) => {
     (acc, comment) => acc + comment.rating,
     0
   );
-  const averageRating = totalRating / comments.length;
+  const averageRating = (totalRating / comments.length).toFixed(1);
 
-  project.rating = averageRating;
+  project.rating = parseFloat(averageRating);
   await project.save();
 
   res.status(200).json({

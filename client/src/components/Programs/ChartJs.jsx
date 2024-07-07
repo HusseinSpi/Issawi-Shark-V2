@@ -29,17 +29,10 @@ const ChartJs = () => {
     error,
   } = useSelector((state) => state.project || {});
 
-  useEffect(() => {
-    dispatch(getAllProjects());
-  }, [dispatch]);
+  const categories = ["Hitech", "Banking", "Healthcare", "Educational"];
 
-  const categories = [
-    "Hitech",
-    "Banking",
-    "Healthcare",
-    "Educational",
-    "Retail",
-  ];
+  const [selectedCategory, setSelectedCategory] = useState("Hitech");
+  const [chartData, setChartData] = useState([]);
 
   const getTopRatedProjects = (category, projects) => {
     return projects
@@ -49,26 +42,28 @@ const ChartJs = () => {
       .map((project) => ({ name: project.title, value: project.rating }));
   };
 
-  const allData = categories.reduce((acc, category) => {
-    acc[category] = getTopRatedProjects(category, projects);
-    return acc;
-  }, {});
+  useEffect(() => {
+    dispatch(getAllProjects());
+  }, [dispatch]);
 
-  const [selectedCategory, setSelectedCategory] = useState("Hitech");
-  const [chartData, setChartData] = useState(allData[selectedCategory] || []);
+  useEffect(() => {
+    if (projects.length > 0) {
+      setChartData(getTopRatedProjects(selectedCategory, projects));
+    }
+  }, [projects, selectedCategory]);
 
   const handleCategoryChange = (event) => {
     const category = event.target.value;
     setSelectedCategory(category);
-    setChartData(allData[category] || []);
+    setChartData(getTopRatedProjects(category, projects));
   };
 
   const data = {
-    labels: chartData.map((company) => company.name),
+    labels: chartData.map((project) => project.name),
     datasets: [
       {
         label: `${selectedCategory} Projects`,
-        data: chartData.map((company) => company.value),
+        data: chartData.map((project) => project.value),
         backgroundColor:
           selectedCategory === "Hitech"
             ? "#DC5F00"
@@ -100,6 +95,14 @@ const ChartJs = () => {
       },
     },
   };
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <section className="mt-5 mb-0">

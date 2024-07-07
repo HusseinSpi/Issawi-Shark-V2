@@ -4,10 +4,8 @@ import { signUpUser } from "../../redux/thunk/userThunks";
 import { toast } from "react-toastify";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     userName: "",
     firstName: "",
@@ -40,7 +38,7 @@ const SignUpForm = () => {
       .unwrap()
       .then((response) => {
         toast.success("Signup successful!");
-        navigate("/general");
+        window.location.reload();
       })
       .catch((error) => {
         toast.error("Failed to sign up");

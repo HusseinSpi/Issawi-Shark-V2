@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
   const [email, setEmail] = useState("");
