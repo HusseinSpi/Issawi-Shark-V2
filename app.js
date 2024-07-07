@@ -12,12 +12,12 @@ const globalErrorHandler = require("./controllers/errorController");
 const userRoutes = require("./routes/userRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const commentRoutes = require("./routes/commentRoutes");
-const recentActivityRoutes = require("./routes/recentActivityRoutes"); // تأكد من أن المسار صحيح
+const recentActivityRoutes = require("./routes/recentActivityRoutes");
 
 const app = express();
 
 const corsOptions = {
-  origin: ["http://localhost:5173", "http://localhost:8000"],
+  origin: ["http://localhost:5173", "https://issawi-shark-v2.onrender.com"],
   credentials: true,
 };
 
