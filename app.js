@@ -50,9 +50,9 @@ app.use("/api/v1/projects", projectRoutes);
 app.use("/api/v1/comments", commentRoutes);
 app.use("/api/v1/recent-activities", recentActivityRoutes);
 
-app.all("*", (req, res, next) => {
-  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
-});
+// app.all("*", (req, res, next) => {
+//   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+// });
 
 app.use(globalErrorHandler);
 
