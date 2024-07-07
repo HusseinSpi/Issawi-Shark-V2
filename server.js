@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 const app = require("./app");
 
-app.set("trust proxy", 1);
+// app.set("trust proxy", 1);
 
 process.on("uncaughtException", (err) => {
   console.log("UNCAUGHT EXCEPTION! 💥 Shutting down...");
