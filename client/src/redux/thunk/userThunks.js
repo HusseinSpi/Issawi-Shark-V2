@@ -105,6 +105,8 @@ export const signUpUser = createAsyncThunk(
   }
 );
 
+axios.defaults.withCredentials = true;
+
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }, { dispatch, rejectWithValue }) => {
@@ -118,7 +120,6 @@ export const loginUser = createAsyncThunk(
           description: `User logged in: ${email}`,
         })
       );
-      window.location.reload();
       return response.data;
     } catch (error) {
       toast.error("Login failed");
