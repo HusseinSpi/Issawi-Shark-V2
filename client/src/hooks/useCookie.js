@@ -10,10 +10,7 @@ const useCookie = (name) => {
       const cookieArray = decodedCookie.split(";");
 
       for (let i = 0; i < cookieArray.length; i++) {
-        let cookie = cookieArray[i];
-        while (cookie.charAt(0) === " ") {
-          cookie = cookie.substring(1);
-        }
+        let cookie = cookieArray[i].trim();
         if (cookie.indexOf(nameEQ) === 0) {
           return cookie.substring(nameEQ.length, cookie.length);
         }
